@@ -5,7 +5,7 @@ const {
   setResponseWithError
 } = require('../util/common-response');
 
-module.exports = function CustomerController() {
+module.exports = function CheckLocationController() {
   this.location = new LocationService();
   this.call = async () => {
     // eslint-disable-next-line

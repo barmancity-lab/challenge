@@ -7,7 +7,7 @@ const {
   setResponseWithError
 } = require('../util/common-response');
 
-module.exports = function CustomerController() {
+module.exports = function CheckWeatherController() {
   this.location = new LocationService();
   this.call = async (req) => {
     // eslint-disable-next-line
@@ -34,7 +34,7 @@ module.exports = function CustomerController() {
   this.resolve = async (req, res) => {
     try {
       const response = await this.call(req);
-      return setResponseWithOk(res, 200, response, 200);
+      return setResponseWithOk(res, 200, response.body, 200);
     } catch (err) {
       return setResponseWithError(res, 500, err.message);
     }
