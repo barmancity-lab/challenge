@@ -1,259 +1,85 @@
 ---
 swagger: '2.0'
 info:
-  description: 'to handle loyalty customer information'
+  description: 'Check the weather'
   version: 'v1'
-  title: 'loyalty-customer-information'
-basePath: '/api/loyalty'
+  title: 'Challenge telecom'
+basePath: '/v1'
 schemes:
   - 'http'
 paths:
-  /v1/customer/{document_type}/{id}:
+  /v1/forecast:
     get:
-      summary: 'Find client by id'
-      description: 'Returns a single customer information'
-      operationId: 'customerGET'
-      consumes:
-        - 'application/json'
+      summary: 'Forecast'
+      description: 'Get five days weather  info according to ip'
       produces:
         - 'application/json'
-      parameters:
-        - name: 'document_type'
-          in: 'path'
-          description: 'The person id type of the client (ie: RUT)'
-          required: true
-          type: 'string'
-        - name: 'id'
-          in: 'path'
-          description: 'The person id of the client (ie: 12345678K, 123456789)'
-          required: true
-          type: 'string'
-        - name: 'x-flow-country'
-          in: 'header'
-          description: "Description: Business Country.  \n \nExample: cl"
-          required: true
-          type: 'string'
-        - name: 'x-flow-timeout'
-          in: 'header'
-          description: "Description: Operation Timeout.  \n \nExample: 4000"
-          required: true
-          type: 'string'
-        - name: 'Content-Type'
-          in: 'header'
-          description: "Description: The content type.  \n \n Example: application/json"
-          required: true
-          type: 'string'
       responses:
         200:
           description: 'Ok'
           schema:
             $ref: '#/definitions/response-ok'
-        400:
-          description: 'Invalid body or headers '
-          schema:
-            $ref: '#/definitions/base_error'
-        500:
-          description: 'internal error'
-          schema:
-            $ref: '#/definitions/internal_base_error'
-      x-swagger-router-controller: 'Default'
-  /v1/customer:
-    post:
-      summary: 'Try to add a client by id'
-      description: 'Try to add a single customer information'
-      operationId: 'customerPOST'
-      consumes:
+  /v1/forecast/{city}:
+    get:
+      summary: 'Forecast'
+      description: 'Get five-day weather information from a city'
+      produces:
         - application/json
       parameters:
-        - name: 'x-flow-country'
-          in: 'header'
-          description: "Description: Business Country.  \n \nExample: cl"
+        - name: 'city'
+          in: 'path'
+          description: "City"
           required: true
           type: 'string'
-        - name: 'x-flow-timeout'
-          in: 'header'
-          description: "Description: Operation Timeout.  \n \nExample: 4000"
-          required: true
-          type: 'string'
-        - name: 'Content-Type'
-          in: 'header'
-          description: "Description: The content type.  \n \n Example: application/json"
-          required: true
-          type: 'string'
-        - in: body
-          name: 'puntosPersonaGenerar'
-          description: 'The customer info to create'
-          schema:
-            $ref: '#/definitions/requestCustomerBody'
       responses:
-        201:
-          description: 'customer created successfully'
+        200:
+          description: 'OK'
           schema:
-            $ref: '#/definitions/base_response_post'
-        400:
-          description: 'Invalid body or headers '
+            $ref: '#/definitions/response-ok'
+  /v1/current/{city}:
+    get:
+      summary: 'Current'
+      description: 'Get current day weather information from a city'
+      produces:
+        - application/json
+      parameters:
+        - name: 'city'
+          in: 'path'
+          description: "City"
+          required: true
+          type: 'string'
+      responses:
+        200:
+          description: 'OK'
           schema:
-            $ref: '#/definitions/base_error'
-        500:
-          description: 'internal error'
+            $ref: '#/definitions/response-ok'
+  /v1/current:
+    get:
+      summary: 'Current'
+      description: 'Get current day weather information according to ip'
+      produces:
+        - 'application/json'
+      responses:
+        200:
+          description: 'Ok'
           schema:
-            $ref: '#/definitions/internal_base_error'
-      x-swagger-router-controller: 'Default'
+            $ref: '#/definitions/response-ok'
+  /v1/location:
+    get:
+      summary: 'Location'
+      description: 'Get location information according to ip'
+      produces:
+        - 'application/json'
+      responses:
+        200:
+          description: 'Ok'
+          schema:
+            $ref: '#/definitions/response-ok'          
 definitions:
-  base_response:
-    type: "object"
-    properties:
-      status_code:
-        type: "integer"
-        example: 200
-      message:
-        type: "object"
-        example: "Operacion realizada exitosamente"
-  base_response_post:
-    type: "object"
-    properties:
-      status_code:
-        type: "integer"
-        example: 200
-      message:
-        type: "object"
-        example: "Exito"
-  base_error:
-    type: "object"
-    properties:
-      status_code:
-        type: "integer"
-        example: 410
-      message:
-        type: "object"
-        example: "Operacion no exitosa usuario no existe"
-  internal_base_error:
-    type: "object"
-    properties:
-      status_code:
-        type: "integer"
-        example: 500
-      message:
-        type: "object"
-        example: "Internal server error"
   response-ok:
-    allOf:
-      - $ref: '#/definitions/base_response'
-      - type: 'object'
-        properties:
-          result:
-            type: 'object'
-            properties:
-              estado_operacion:
-                type: 'object'
-                properties:
-                  codigo_operacion:
-                    type: 'string'
-                  glosa_operacion:
-                    type: 'string'
-              persona:
-                type: 'object'
-                properties:
-                  apellido_paterno:
-                    type: 'string'
-                  nombres:
-                    type: 'string'
-              documento_identidad:
-                type: 'object'
-                properties:
-                  tipo_documento:
-                    type: 'string'
-                  numero_documento:
-                    type: 'string'
-              informacion_contacto:
-                type: 'object'
-                properties:
-                  telefono:
-                    type: 'object'
-                    properties:
-                      numero_telefono:
-                      type: 'string'
-                  correo_electronico:
-                    type: 'object'
-                    properties:
-                      direccion_correo_electronico:
-                        type: 'string'
-              fecha_registro:
-                type: 'string'
-  requestCustomerBody:
-    title: requestCustomerBody
-    type: object
+    type: 'object'
     properties:
-      persona:
-        $ref: '#/definitions/personaSchema'
-      informacion_contacto:
-        $ref: '#/definitions/informacioncontactoSchema'
-      fecha_registro:
-        type: string
-        example: '2018-10-07'
-    required:
-      - persona
-      - informacion_contacto
-      - fecha_registro
-  personaSchema:
-    title: personaSchema
-    type: object
-    properties:
-      apellido_materno:
-        type: string
-        example: 'Barbera'
-      apellido_paterno:
-        type: string
-        example: 'Washington'
-      nombres:
-        type: string
-        example: 'Ana Julia'
-      documento_identidad:
-        $ref: '#/definitions/documentoidentidadSchema'
-    required:
-      - apellido_materno
-      - apellido_paterno
-      - nombres
-      - documento_identidad
-  documentoidentidadSchema:
-    title: documentoidentidadSchema
-    type: object
-    properties:
-      tipo_documento:
-        type: string
-        example: 'RUT'
-      numero_documento:
-        type: string
-        example: '42222222K'
-    required:
-      - tipo_documento
-      - numero_documento
-  informacioncontactoSchema:
-    title: informacioncontactoSchema
-    type: object
-    properties:
-      telefono:
-        $ref: '#/definitions/telefonoSchema'
-      correo_electronico:
-        $ref: '#/definitions/correoelectronicoSchema'
-    required:
-      - telefono
-      - correo_electronico
-  telefonoSchema:
-    title: telefonoSchema
-    type: object
-    properties:
-      numero_telefono:
-        type: string
-        example: '12345679'
-    required:
-      - numero_telefono
-  correoelectronicoSchema:
-    title: correoelectronicoSchema
-    type: object
-    properties:
-      direccion_correo_electronico:
-        type: string
-        example: 'abarbera@gmail.com'
-    required:
-      - direccion_correo_electronico
+      status_code:
+       type: 'number'
+      message:
+       type: 'object'

@@ -2,8 +2,6 @@
 
 const context = require('./app/config/').context;
 
-const company = 'telecom';
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const compression = require('compression');
@@ -26,17 +24,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(compression());
 
 // health check MS
-app.get(`/api/${company}/${context.version}/health`, (req, res) => {
+app.get(`/${context.version}/health`, (req, res) => {
   res.send(`${context.name} up and running`);
 });
 
 app.use(
-  `/api/${company}/${context.version}/api-docs`,
+  `/${context.version}/api-docs`,
   swaggerUi.serve,
   swaggerUi.setup(swaggerDocument)
 );
 
-app.use(`/api/${company}/${context.version}/weather`, route);
+app.use(`/${context.version}`, route);
 
 app.use((req, res) => {
   // eslint-disable-line
