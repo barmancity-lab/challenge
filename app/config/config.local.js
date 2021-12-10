@@ -1,14 +1,13 @@
 module.exports = {
   check_weather: {
-    endpoint: 'https://api.openweathermap.org/data/2.5',
-    timeout: 5000,
-    key: '12c0fbb483ca3872c18f849d587299f9',
-    services: ['weather', 'forecast']
+    endpoint: process.env.NODE_CHECK_WEATHER_ENDPOINT,
+    timeout: process.env.NODE_CHECK_WEATHER_TIMEOUT,
+    key: process.env.NODE_CHECK_WEATHER_KEY,
+    services: process.env.NODE_CHECK_WEATHER_SERVICES
   },
   location_service: {
-    endpoint: 'http://ip-api.com/json',
-    timeout: 5000
+    endpoint: process.env.NODE_CHECK_LOCATION_ENDPOINT,
+    timeout: process.env.NODE_CHECK_LOCATION_TIMEOUT
   },
-  country: 'AR',
+  country: process.env.NODE_CHECK_WEATHER_COUNTRY,
 };
-
