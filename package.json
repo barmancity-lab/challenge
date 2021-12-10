@@ -41,7 +41,6 @@
     "compression": "^1.7.2",
     "cors": "^2.8.4",
     "debug": "^3.1.0",
-    "distributed-tracing": "0.0.1",
     "dotenv": "^8.2.0",
     "express": "^4.16.3",
     "express-routemap": "^1.6.0",
