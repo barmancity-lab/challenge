@@ -16,6 +16,7 @@ module.exports = function CheckLocationController() {
   this.get = async (req, res) => {
     try {
       const response = await this.call();
+      console.log(response);
       return setResponseWithOk(res, 200, response, 200);
     } catch (err) {
       return setResponseWithError(res, 500, err.message);

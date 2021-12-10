@@ -74,6 +74,7 @@
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-security": "^1.4.0",
+    "dotenv": "^8.2.0",
     "eslint-watch": "^3.1.4",
     "istanbul": "^1.1.0-alpha.1",
     "lint-staged": "^7.2.0",
