@@ -53,5 +53,5 @@ coverge/
 *.info
 
 .stryker-tmp
-
+.env
 lcov
