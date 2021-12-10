@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(compression());
 
 // health check MS
-app.get(`/${baseUrl}/${context.version}/health`, (req, res) => {
+app.get(`/${baseUrl}/${context.version}/weather/health`, (req, res) => {
   res.send(`${context.name} up and running`);
 });
 

@@ -41,7 +41,7 @@ There is an endpoint to see the swagger file
 
 run the service and go to:
 
-[http://localhost:3053/v1/api-docs](http://localhost:3053/v1/api-docs/)
+[http://localhost:3053/api/telecom/v1/api-docs/](http://localhost:3053/api/telecom/v1/api-docs/)
 
 
 ## Unit testing
