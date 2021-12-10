@@ -25,7 +25,7 @@ module.exports = function (name, test) {
       let mockLogger = {
         Logger: { getLogger: () => logger }
       }
-      mockery.registerMock('fif-common-node-logger', mockLogger);
+     
 
       // config mock with local config
       const config = require('./config/config.local')

@@ -48,7 +48,6 @@ baseSpec('customerRoute', () => {
           return middlewares;
         };
 
-        mockery.registerMock('fif-payments-get-middlewares', getMiddlewaresMock);
         require('./weather-route');
 
         expect(getSpy.called).to.be.true;
